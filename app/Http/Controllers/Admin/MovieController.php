@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
-        return view('admin.movie.index', compact('movies'));
+        return view('admin.movies.index', compact('movies'));
     }
 
     /**

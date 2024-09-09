@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('release_date')->nullable();
             $table->integer('rt_score')->nullable();
             $table->string('image')->nullable();
+            $table->string('slug',255);
             $table->timestamps();
         });
     }
