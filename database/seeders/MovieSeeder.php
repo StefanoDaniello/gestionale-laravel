@@ -22,6 +22,7 @@ class MovieSeeder extends Seeder
             $new_movie->release_date = $movie['release_date'];
             $new_movie->rt_score = $movie['rt_score'];
             $new_movie->image = $movie['image'];
+            $new_movie->slug = Movie::generateSlug($new_movie->title);
             $new_movie->save();
         }
     }

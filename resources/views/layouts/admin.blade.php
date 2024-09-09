@@ -20,13 +20,11 @@
 </head>
 
 <body>
-    <div id="admin" >
-        <div id="wrapper" >
-           @include('partials.header')
-            <main class="container-fluid">
-                @yield('content')
-            </main>
-        </div>
+    <div id="admin">
+        @include('partials.header')
+        <main>
+            @yield('content')
+        </main>
     </div>
 </body>
 
