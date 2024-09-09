@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+@section('title', 'Dashboard')
 
 @section('content')
 <div class="container">
@@ -8,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('User Dashboard') }}</div>
+                <div class="card-header">Ciao, {{ Auth::user()->name }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,8 +17,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                    <p>Sei loggato crea subito la tua libreria di film o libri!</p>
                 </div>
             </div>
         </div>
