@@ -38,7 +38,7 @@
                 <td>{{ $movie->release_date }}</td>
                 <td>{{ $movie->rt_score }}</td>
                 <td>
-                    <img src="{{ $movie->image }}" alt="{{ $movie->title }}" style="width: 50px; height: auto;">
+                    <img src="{{$movie->image ? asset('storage/' . $movie->image) : 'https://via.placeholder.com/150' }}" alt="{{ $movie->title }}" style="width: 50px; height: auto;">
                 </td>
                 <td class="d-flex height-100" style="padding-bottom:100px">
                     <a href="{{ route('admin.movies.show', $movie->slug) }}" class="btn btn-info btn-sm " title="Visualizza">

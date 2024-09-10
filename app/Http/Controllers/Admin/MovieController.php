@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\MovieRequest;
 
 
@@ -34,8 +35,13 @@ class MovieController extends Controller
     {
         $form_data = $request->validated();
         $form_data['slug'] = Movie::generateSlug($form_data['title']);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $this->handleFileUpload($request->file('image'), 'movies_images');
+            $form_data['image'] = $imagePath;
+        }
         $newMovie = Movie::create($form_data);
-        return redirect()->route('admin.movies.show', $newMovie->slug )->with('message', 'il film ' . $newMovie->title . ' è stato aggiunto correttamente');
+        return redirect()->route('admin.movies.show', $newMovie->slug)->with('message', 'il film ' . $newMovie->title . ' è stato aggiunto correttamente');
     }
 
     /**
@@ -61,8 +67,16 @@ class MovieController extends Controller
     {
         $form_data = $request->validated();
         $form_data['slug'] = Movie::generateSlug($form_data['title']);
+
+        if ($request->hasFile('image')) {
+            if ($movie->image) {
+                Storage::delete($movie->image);
+            }
+            $imagePath = $this->handleFileUpload($request->file('image'), 'movies_images');
+            $form_data['image'] = $imagePath;
+        }
         $movie->update($form_data);
-        return redirect()->route('admin.movies.show', $movie->slug )->with('message', 'il film ' . $movie->title . ' è stato aggiornato correttamente');
+        return redirect()->route('admin.movies.show', $movie->slug)->with('message', 'il film ' . $movie->title . ' è stato aggiornato correttamente');
     }
 
     /**
@@ -70,7 +84,29 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        if ($movie->image) {
+            Storage::delete($movie->image);
+        }
         $movie->delete();
         return redirect()->route('admin.movies.index')->with('message', 'il film ' . $movie->title . ' è stato eliminato correttamente');
     }
+
+
+     private function handleFileUpload($file, $directory)
+    {
+        // Genera un nome di file unico
+        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        
+        // Carica il file nella directory specificata
+        try {
+            $path = Storage::putFileAs($directory, $file, $filename);
+        } catch (\Exception $e) {
+            // Gestisce eventuali errori durante il caricamento
+            throw new \Exception('Errore durante il caricamento del file: ' . $e->getMessage());
+        }
+
+        return $path;
+    }
+
 }
+

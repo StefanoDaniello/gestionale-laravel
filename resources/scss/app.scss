@@ -8,3 +8,12 @@ $fa-font-path: "../webfonts" !default;
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
 
 @import '~bootstrap/scss/bootstrap';
+
+
+.container-img {
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
+}

@@ -45,12 +45,26 @@
             @enderror
         </div>
         <div class="col-6">
-            <label for="image" class="form-label">Immagine</label>
-            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
-             name="image" value="{{ old('image') }}" min="3" max="255">
+            <div class="d-flex align-items-center mb-2">
+                <label for="image" class="form-label mx-1">Immagine</label>
+                @if (old('image'))
+                <div class="container-img">
+                    <img src="{{ asset('storage/' . old('image')) }}" alt="{{ old('title') }}" id="uploadPreview"
+                        class="shadow rounded-4 m-4">
+                </div>
+            @else
+                <div class="container-img">
+                    <img src="https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg"
+                        alt="placeholder-image" id="uploadPreview" class="shadow rounded-4 m-4">
+                </div>
+            @endif
+            </div>
+            <input type="file"  accept="image/*" class="form-control @error('image') is-invalid @enderror" id="upload_image" 
+             name="image" value="{{ old('image') }}" max="2048">
             @error('image')
-            <div class="alert alert-danger">{{ $message }}</div>
+                <div class="text-danger">{{ $errors->first('image') }}</div>
             @enderror
+              
         </div>
         <div class="col-6">
             <label for="description" class="form-label">Descrizione</label>
@@ -68,3 +82,4 @@
 </div>
 
 @endsection
+

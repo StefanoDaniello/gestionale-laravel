@@ -11,7 +11,7 @@
             <a class="nav-link" href="#">Libri</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin/movies">Film</a>
+            <a class="nav-link" href="{{route('admin.movies.index')}}">Film</a>
           </li>
           
         </ul>
