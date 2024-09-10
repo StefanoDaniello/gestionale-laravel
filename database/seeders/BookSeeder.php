@@ -23,8 +23,8 @@ class BookSeeder extends Seeder
             $book->description = $faker->paragraph();
             $book->image = $faker->imageUrl();
             $book->release_date = $faker->date();
-            $book->price = $faker->randomFloat(2, 0, 100);
-            $book->rt_score = $faker->randomNumber(1);
+            $book->price = $faker->randomNumber(1, 5);
+            $book->rt_score = $faker->randomNumber(1, 5);
             $book->save();
         }
     }

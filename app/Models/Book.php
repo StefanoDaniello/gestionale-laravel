@@ -10,7 +10,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'producer', 'release_date', 'rt_score', 'image', 'slug'];
+    protected $fillable = ['title', 'description', 'author', 'release_date', 'rt_score', 'image', 'slug', 'price'];
 
     public static function generateSlug($title){
         $slug = Str::slug($title, '-');

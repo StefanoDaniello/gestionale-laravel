@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->date('release_date')->nullable();
-            $table->float('price')->nullable();
+            $table->integer('price')->nullable();
             $table->integer('rt_score')->nullable();
             $table->timestamps();
         });
