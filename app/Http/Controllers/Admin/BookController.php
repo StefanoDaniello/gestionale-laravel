@@ -30,9 +30,9 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        $form_data = $request->all();
+        $form_data = $request->validated();
         $form_data['slug'] = Book::generateSlug($form_data['title']);	
 
         if($request->hasFile('image')){
