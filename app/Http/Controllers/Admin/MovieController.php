@@ -59,7 +59,10 @@ class MovieController extends Controller
      */
     public function update(MovieRequest $request, Movie $movie)
     {
-        //
+        $form_data = $request->validated();
+        $form_data['slug'] = Movie::generateSlug($form_data['title']);
+        $movie->update($form_data);
+        return redirect()->route('admin.movies.show', $movie->slug )->with('message', 'il film ' . $movie->title . ' è stato aggiornato correttamente');
     }
 
     /**
@@ -67,6 +70,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return redirect()->route('admin.movies.index')->with('message', 'il film ' . $movie->title . ' è stato eliminato correttamente');
     }
 }

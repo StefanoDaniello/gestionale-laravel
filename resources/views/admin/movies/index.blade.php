@@ -50,7 +50,7 @@
                     <form action="{{ route('admin.movies.destroy', $movie->slug) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" title="Elimina" onclick="return confirm('Sei sicuro di voler eliminare questo film?');">
+                        <button type="submit" class="btn btn-danger btn-sm" title="Elimina" onclick="return confirm('Sei sicuro di voler  eliminare il film {{$movie->title}} ?');">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </form>
