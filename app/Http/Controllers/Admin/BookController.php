@@ -99,11 +99,15 @@ class BookController extends Controller
 
     private function handleFileUpload($file, $directory)
     {
-        // Genera un nome di file unico
+        // Genera un nome di file unico= 
+        //  time(): Restituisce il timestamp corrente ,
+        // uniqid(): Genera un ID univoco basato sul microtempo corrente
+        // .getClientOriginalExtension(): Restituisce l'estensione originale del file
         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
         
         // Carica il file nella directory specificata
         try {
+            // passo il percorso della cartella il file e il nome del file generato
             $path = Storage::putFileAs($directory, $file, $filename);
         } catch (\Exception $e) {
             // Gestisce eventuali errori durante il caricamento
